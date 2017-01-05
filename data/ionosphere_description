@@ -1,0 +1,1 @@
+The y value in this dataset is either "good" or "bad" according to data's definition.  This is a binary classification task. In the ionosphere_y.csv file, we mapped the "b" labels to 0 and "g" labels to 1.
