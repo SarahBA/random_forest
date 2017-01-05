@@ -95,7 +95,8 @@ class DataPool:
 
 def demo():
     #data = DataPool('glass')
-    data = DataPool('diabetes')
+    #data = DataPool('diabetes')
+    data = DataPool('sonar')
     #print("\n")
     #print (data.data)
     #print (data.class_v)
