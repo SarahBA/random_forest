@@ -8,20 +8,40 @@ class DataPool:
     Take use of the methods to retrieve the data we need
     """
     def __init__(self, name_data):
-        # only for glass
         self.name_data = name_data
-        self.datapath = self.__get_paths(name_data)
-        self.rawdata = self.__readdata()  # without any processing
-        self.data = np.array(self.rawdata[:, 1:-1],dtype=np.float)  # only the data
+
+        self.data = self.__readdata(name_data+'_features.csv')  # only the data
+        print("\nself.data: ", self.data)
+        print("type = " + str(type(self.data)) +"shape: " + self.data.shape )
 
         [self.num_samples, self.num_features] = self.data.shape
-        self.class_v = np.array(self.rawdata[:, -1],dtype=np.int)
-        self.attribute_type = [0] * 9  # 0: numerical, 1: categorical
-        self.cla_reg = 1  # Whether classification or regression, 1 is classification.
+        print("\nself.data.shape = " +  str(self.data.shape))
+        print("self.num_samples = " + str(self.num_samples))
+        print("self.num_features = "+ str(self.num_features))
+
+        self.class_v = self.__readdata(name_data+'_y.csv').flatten()
+        #self.class_v = self.rawdata[:, -1]
+        print("\nclass_v = " + str(self.class_v))
+        print("type(class_v) = " + str(type(self.class_v)))
+        print("class_v.shape = " + str(self.class_v.shape))
+        #print("class_v.array = " + str(self.class_v.flatten()))
+
+        #self.attribute_type1 = [0] * 9  # 0: numerical, 1: categorical
+        #print("\nself.attribute_type1 = "+ str(self.attribute_type1) + "  type="+ str(type(self.attribute_type1)) + "  shape = ")
+        attribute_type_str = self.__readdata(name_data+'_attribute_type.csv').flatten()
+        self.attribute_type = [int(x) for x in attribute_type_str]
+        print("\nself.attribute_type = " + str(self.attribute_type) + "  type="+ str(type(self.attribute_type)) + "  shape = ")
+
+        '''
+        classification tree: cla_reg = 1
+        regression tree : cla_reg = 0
+        '''
+        self.cla_reg = int(self.__readdata(name_data+'_clas_reg_tree.csv').flatten()[0])
+        print("\nself.cla_reg = " + str(self.cla_reg) + "  type = " + str(type(self.cla_reg)) )#+ "  shape = " + str(self.cla_reg.shape))
         self.num_class = 6
 
     # data_type, y, y_type, n_classes, min_leaf_size = 1, n_retry = 1,
-    def __get_paths(self, data_name):
+    def __get_paths(self):
         '''
         The directory system:
         The project is in the file named "project"
@@ -34,10 +54,10 @@ class DataPool:
         src_path = os.getcwd()  # get the directory of src
         project_path = os.path.dirname(src_path)  # get the parent directory of src, that is project
         data_path = os.path.join(project_path, 'data')  # get the directory of data, which should be in the project
-        training_data_dir = os.path.join(data_path, data_name)  # now we are in the folder containing the training data
-        return training_data_dir
+        #print("data_path = " + data_path)
+        return data_path
 
-    def __readdata(self):
+    def __readdata(self, fileName):
         '''
         The directory system:
         The project is in the file named "project"
@@ -53,8 +73,10 @@ class DataPool:
         :param datapath: the path of the data
         :return: 'data' is ndarray
         '''
+        data_file = os.path.join(self.__get_paths(), fileName)  # now we are in the folder containing the training data
+        #print("data_file = "+ data_file)
         data_l = []
-        with open(self.datapath, "r") as f:
+        with open(data_file, "r") as f:
             mylist = f.read().splitlines()
             for line in mylist:
                 currentline = line.split(",")
