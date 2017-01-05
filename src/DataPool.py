@@ -12,7 +12,6 @@ class DataPool:
 
         self.data = self.__readdata(name_data+'_features.csv')  # only the data
         print("\nself.data: ", self.data)
-        print("type = " + str(type(self.data)) +"shape: " + self.data.shape )
 
         [self.num_samples, self.num_features] = self.data.shape
         print("\nself.data.shape = " +  str(self.data.shape))
@@ -38,7 +37,13 @@ class DataPool:
         '''
         self.cla_reg = int(self.__readdata(name_data+'_clas_reg_tree.csv').flatten()[0])
         print("\nself.cla_reg = " + str(self.cla_reg) + "  type = " + str(type(self.cla_reg)) )#+ "  shape = " + str(self.cla_reg.shape))
-        self.num_class = 6
+
+        if self.cla_reg == 1:
+            self.num_class = np.unique(self.class_v).flatten()
+            print("\nself.num_class = " + str(self.num_class) + "   type= " + str(type(self.num_class)) + "   shape=" + str(self.num_class.shape))
+        print("\n<<<<<<")
+
+
 
     # data_type, y, y_type, n_classes, min_leaf_size = 1, n_retry = 1,
     def __get_paths(self):
@@ -82,14 +87,21 @@ class DataPool:
                 currentline = line.split(",")
                 data_l.append(currentline)
         data = np.array(data_l)
+        #print("\n **** fileName = "+ fileName)
+        #print("data = " + str(data))
+        #print("data[50] = " + str(data[50]))
         return data
 
 
 def demo():
-    data = DataPool('glass.txt')
-    print (data.data)
-    print (data.class_v)
-    print (data.attribute_type)
-    print (data.cla_reg)
-    print (data.num_class)
-
+    #data = DataPool('glass')
+    data = DataPool('diabetes')
+    #print("\n")
+    #print (data.data)
+    #print (data.class_v)
+    #print (data.attribute_type)
+    #print (data.cla_reg)
+    #print (data.num_class)
+    #print (data.data[50])
+    #print("\n")
+demo()
