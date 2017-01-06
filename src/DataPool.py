@@ -25,6 +25,10 @@ class DataPool:
         print("class_v.shape = " + str(self.class_v.shape))
         #print("class_v.array = " + str(self.class_v.flatten()))
 
+        '''
+         numerical = 0
+         categorical = 1
+        '''
         #self.attribute_type1 = [0] * 9  # 0: numerical, 1: categorical
         #print("\nself.attribute_type1 = "+ str(self.attribute_type1) + "  type="+ str(type(self.attribute_type1)) + "  shape = ")
         attribute_type_str = self.__readdata(name_data+'_attribute_type.csv').flatten()
@@ -98,7 +102,8 @@ def demo():
     #data = DataPool('diabetes')
     #data = DataPool('sonar')
     #data = DataPool('ionosphere')
-    data = DataPool('vehicle')
+    #data = DataPool('vehicle')
+    ata = DataPool('soybean')
     #print("\n")
     #print (data.data)
     #print (data.class_v)
