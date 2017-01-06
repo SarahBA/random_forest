@@ -26,8 +26,8 @@ class DataPool:
         #print("class_v.array = " + str(self.class_v.flatten()))
 
         '''
-         numerical = 0
-         categorical = 1
+         numerical (real?) = 0
+         categorical (integer?) = 1
         '''
         #self.attribute_type1 = [0] * 9  # 0: numerical, 1: categorical
         #print("\nself.attribute_type1 = "+ str(self.attribute_type1) + "  type="+ str(type(self.attribute_type1)) + "  shape = ")

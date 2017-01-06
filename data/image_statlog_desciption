@@ -1,3 +1,14 @@
+image_statlog_y.csv classes: 
+1 = brickface, 
+2 = sky, 
+3 = foliage, 
+4 = cement, 
+5 = window, 
+6 = path, 
+7 = grass. 
+
+
+
 Attribute Information:
 
 1. region-centroid-col: the column of the center pixel of the region. 
@@ -19,14 +30,4 @@ Attribute Information:
 17. value-mean: 3-d nonlinear transformation of RGB. (Algorithm can be found in Foley and VanDam, Fundamentals of Interactive Computer Graphics) 
 18. saturatoin-mean: (see 17) 
 19. hue-mean: (see 17) 
-
-Classes: 
-1 = brickface, 
-2 = sky, 
-3 = foliage, 
-4 = cement, 
-5 = window, 
-6 = path, 
-7 = grass. 
-
 
