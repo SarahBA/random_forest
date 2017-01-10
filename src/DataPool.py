@@ -26,8 +26,18 @@ class DataPool:
         '''
         self.cla_reg = int(self.__readdata(name_data+'_clas_reg_tree.csv').flatten()[0])
 
-        if self.cla_reg == 1:
-            self.num_class = np.unique(self.class_v).flatten()
+        self.num_class_temp = []
+        self.num_class = []
+
+        for i in range(0, self.num_features):
+            if self.attribute_type[i] == 1:
+                for j in range(0, self.num_samples):
+                    self.num_class_temp.append(self.data[j][i])
+                self.num_class.append( len(list(set(self.num_class_temp))))
+                self.num_class_temp = []
+            else:
+                self.num_class.append(-1)
+
 
 
 
@@ -95,5 +105,4 @@ def demo():
     print (data.attribute_type)
     print (data.cla_reg)
     print (data.num_class)
-    print (data.data[50])
 demo()
